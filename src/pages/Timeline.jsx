@@ -46,15 +46,17 @@ export default function Timeline() {
     }
   });
 
-  // ✅ Icons
   const getIcon = (type) => {
-    if (!type) return "🤝";
-    const t = type.toLowerCase();
-    if (t === "call") return "📞";
-    if (t === "text") return "💬";
-    if (t === "video") return "🎥";
-    return "🤝";
-  };
+  if (!type) return "/default.png";
+
+  const t = type.toLowerCase();
+
+  if (t === "call") return "/call.png";
+  if (t === "text") return "/text.png";
+  if (t === "video") return "/video.png";
+
+  return "/default.png";
+};
 
   return (
     <div className="bg-gray-100 min-h-screen pt-10 pb-12">
@@ -178,7 +180,10 @@ export default function Timeline() {
               key={item.id}
               className="bg-white rounded-lg shadow-sm p-4 flex items-center gap-4"
             >
-              <div className="text-2xl">{getIcon(item.type)}</div>
+              <img
+  src={getIcon(item.type)}
+  className="w-8 h-8"
+/>
 
               <div>
                 <p className="font-medium">

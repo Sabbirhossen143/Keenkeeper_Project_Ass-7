@@ -57,17 +57,20 @@ export default function FriendDetails() {
         </div>
 
         {/* ACTION BUTTON CARDS */}
-        <div className="bg-white p-3 rounded-lg shadow-sm text-center cursor-pointer hover:bg-gray-50">
-          ⏰ Snooze 2 Weeks
+        <div className="bg-white p-3 rounded-lg shadow-sm cursor-pointer hover:bg-gray-50 flex items-center justify-center gap-3">
+        <img src="/snooze.png" className="w-6 h-6" />
+        <span>Snooze 2 Weeks</span>
         </div>
 
-        <div className="bg-white p-3 rounded-lg shadow-sm text-center cursor-pointer hover:bg-gray-50">
-          📦 Archive
+        <div className="bg-white p-3 rounded-lg shadow-sm cursor-pointer hover:bg-gray-50 flex items-center justify-center gap-3">
+        <img src="/file.png" className="w-6 h-6" />
+        <span>Archive</span>
         </div>
 
-        <div className="bg-white p-3 rounded-lg shadow-sm text-center text-red-500 cursor-pointer hover:bg-red-50">
-          🗑 Delete
-        </div>
+       <div className="bg-white p-3 rounded-lg shadow-sm text-red-500 cursor-pointer hover:bg-red-50 flex items-center justify-center gap-3">
+       <img src="/delete.png" className="w-5 h-5" />
+       <span>Delete</span>
+       </div>
 
       </div>
 
@@ -116,23 +119,26 @@ export default function FriendDetails() {
           <div className="grid grid-cols-3 gap-4">
             <button
               onClick={() => handleClick("Call")}
-              className="p-4 bg-gray-50 rounded-lg hover:bg-gray-100"
+              className="p-4 bg-gray-50 rounded-lg hover:bg-gray-100 flex items-center justify-center gap-3"
             >
-              📞 Call
+              <img src="/call.png" className="w-5 h-5" />
+              <span>Call</span>
             </button>
 
             <button
               onClick={() => handleClick("Text")}
-              className="p-4 bg-gray-50 rounded-lg hover:bg-gray-100"
+              className="p-4 bg-gray-50 rounded-lg hover:bg-gray-100 flex items-center justify-center gap-2"
             >
-              💬 Text
+              <img src="/text.png" className="w-5 h-5" />
+              <span>Text</span>
             </button>
 
             <button
               onClick={() => handleClick("Video")}
-              className="p-4 bg-gray-50 rounded-lg hover:bg-gray-100"
+              className="p-4 bg-gray-50 rounded-lg hover:bg-gray-100 flex items-center justify-center gap-2"
             >
-              🎥 Video
+              <img src="/video.png" className="w-5 h-5" />
+              <span>Video</span>
             </button>
           </div>
         </div>
