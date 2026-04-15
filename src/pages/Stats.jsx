@@ -23,7 +23,9 @@ export default function Stats() {
     { name: "Video", value: counts.Video },
   ];
 
-  // 🎨 Colors (match screenshot style)
+  // ✅ Check if all values are 0
+  const hasData = data.some((item) => item.value > 0);
+
   const COLORS = ["#7c3aed", "#1f4d3b", "#2f9e44"];
 
   return (
@@ -42,25 +44,41 @@ export default function Stats() {
             By Interaction Type
           </p>
 
-          {/* CHART */}
-          <div className="flex justify-center">
-            <PieChart width={300} height={300}>
-              <Pie
-                data={data}
-                dataKey="value"
-                innerRadius={70}   
-                outerRadius={100}
-                paddingAngle={5}
-              >
-                {data.map((entry, index) => (
-                  <Cell key={index} fill={COLORS[index]} />
-                ))}
-              </Pie>
+          {/* ✅ CONDITIONAL RENDER */}
+          {!hasData ? (
+            <div className="flex flex-col items-center justify-center py-16 text-center">
+              <img
+  src="/pie-chart.png"
+  alt="No data"
+  className="w-16 h-16 mb-3 object-contain"
+/>
+              <p className="text-gray-500 text-lg font-medium mb-2">
+                No interactions logged yet
+              </p>
+              <p className="text-gray-400 text-sm">
+                Start calling, texting, or video chatting with your friends to see insights here.
+              </p>
+            </div>
+          ) : (
+            <div className="flex justify-center">
+              <PieChart width={300} height={300}>
+                <Pie
+                  data={data}
+                  dataKey="value"
+                  innerRadius={70}
+                  outerRadius={100}
+                  paddingAngle={5}
+                >
+                  {data.map((entry, index) => (
+                    <Cell key={index} fill={COLORS[index]} />
+                  ))}
+                </Pie>
 
-              <Tooltip />
-              <Legend iconType="circle" />
-            </PieChart>
-          </div>
+                <Tooltip />
+                <Legend iconType="circle" />
+              </PieChart>
+            </div>
+          )}
 
         </div>
       </div>
