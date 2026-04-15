@@ -59,7 +59,7 @@ export default function Timeline() {
 
         {/* EMPTY STATE */}
         {filtered.length === 0 && (
-          <p className="text-gray-500">No timeline entries found.</p>
+          <p className="text-gray-500 text-center">No timeline entries found.</p>
         )}
 
         {/* ITEMS */}
