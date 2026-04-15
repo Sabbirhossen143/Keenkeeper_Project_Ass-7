@@ -41,11 +41,30 @@ export default function FriendDetails() {
           />
           <h2 className="font-semibold">{friend.name}</h2>
 
-          <span className="inline-block bg-red-500 text-white text-xs px-2 py-1 rounded mt-1">
-            Overdue
-          </span>
+          <span
+  className={`inline-block text-xs px-3 py-1 rounded-full mt-1 font-medium ${
+    friend.status === "Overdue"
+      ? "bg-red-600 text-white"
+      : friend.status === "Almost Due"
+      ? "bg-yellow-600 text-white"
+      : friend.status === "On-Track"
+      ? "bg-[#263B26] text-white"
+      : "bg-gray-100 text-gray-600"
+  }`}
+>
+  {friend.status}
+</span>
 
-          <p className="text-sm text-gray-500 mt-1">FAMILY</p>
+          <div className="flex justify-center gap-2 flex-wrap mt-2">
+  {friend.tags?.map((tag, i) => (
+    <span
+      key={i}
+      className="bg-green-100 text-green-700 text-xs px-2 py-1 rounded-full"
+    >
+      {tag}
+    </span>
+  ))}
+</div>
 
           <p className="italic text-gray-500 text-sm mt-3">
             "{friend.bio}"
@@ -80,31 +99,35 @@ export default function FriendDetails() {
         {/* STATS */}
         <div className="grid grid-cols-3 gap-4">
           <div className="bg-white p-4 rounded-xl shadow-sm text-center">
-            <p className="text-xl font-semibold">
+            <p className="text-[35px] font-bold text-[#244D3F]">
               {friend.days_since_contact}
             </p>
-            <p className="text-sm text-gray-500">Days Since Contact</p>
+            <p className="text-gray-500">Days Since Contact</p>
           </div>
 
           <div className="bg-white p-4 rounded-xl shadow-sm text-center">
-            <p className="text-xl font-semibold">{friend.goal}</p>
-            <p className="text-sm text-gray-500">Goal (Days)</p>
+            <p className="text-[35px] font-bold text-[#244D3F]">{friend.goal}</p>
+            <p className="text text-gray-500">Goal (Days)</p>
           </div>
 
-          <div className="bg-white p-4 rounded-xl shadow-sm text-center">
-            <p className="text-sm font-semibold">
-              {friend.next_due_date}
-            </p>
-            <p className="text-sm text-gray-500">Next Due</p>
+          <div className="bg-white p-4 rounded-xl shadow-sm text-center ">
+            <p className="text-[30px] font-bold text-[#244D3F]">
+  {new Date(friend.next_due_date).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  })}
+</p>
+            <p className="text text-gray-500">Next Due</p>
           </div>
         </div>
 
         {/* RELATIONSHIP GOAL */}
         <div className="bg-white p-4 rounded-xl shadow-sm flex justify-between items-center">
-          <div>
-            <h3 className="font-semibold">Relationship Goal</h3>
-            <p className="text-sm text-gray-500">
-              Connect every {friend.goal} days
+          <div className="flex flex-col gap-4">
+            <h3 className="text-[25px] text-[#244D3F] font-semibold">Relationship Goal</h3>
+            <p className="text-[20px] text-gray-500">
+              Connect every <span className="font-bold text-black">{friend.goal} days</span>
             </p>
           </div>
           <button className="border px-3 py-1 rounded hover:bg-gray-100">
@@ -114,7 +137,7 @@ export default function FriendDetails() {
 
         {/* QUICK CHECK-IN */}
         <div className="bg-white p-4 rounded-xl shadow-sm">
-          <h3 className="font-semibold mb-3">Quick Check-In</h3>
+          <h3 className="text-[25px] font-bold text-[#244D3F] mb-3">Quick Check-In</h3>
 
           <div className="grid grid-cols-3 gap-4">
             <button
