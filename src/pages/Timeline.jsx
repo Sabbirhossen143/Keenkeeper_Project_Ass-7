@@ -10,11 +10,12 @@ export default function Timeline() {
   const [showFilter, setShowFilter] = useState(false);
   const [showSort, setShowSort] = useState(false);
 
-  // ✅ Date formatter
+  // ✅ Format Date ONLY
   const formatDate = (dateStr) => {
     if (!dateStr) return "No date";
+
     const d = new Date(dateStr);
-    if (isNaN(d)) return dateStr;
+    if (isNaN(d)) return "Invalid date";
 
     return d.toLocaleDateString("en-US", {
       year: "numeric",
@@ -31,12 +32,18 @@ export default function Timeline() {
           (t) => t.type?.toLowerCase() === filter.toLowerCase()
         );
 
-  // ✅ Sort
+  // ✅ FIXED SORT (safe + correct)
   const sorted = [...filtered].sort((a, b) => {
+    if (!a.date || !b.date) return 0;
+
     const dateA = new Date(a.date).getTime();
     const dateB = new Date(b.date).getTime();
 
-    return sortOrder === "newest" ? dateB - dateA : dateA - dateB;
+    if (sortOrder === "newest") {
+      return dateB - dateA; // newest first
+    } else {
+      return dateA - dateB; // oldest first
+    }
   });
 
   // ✅ Icons
@@ -50,7 +57,7 @@ export default function Timeline() {
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen pt-10 pb-2">
+    <div className="bg-gray-100 min-h-screen pt-10 pb-12">
       <div className="max-w-6xl mx-auto px-6">
 
         {/* TITLE */}
@@ -62,15 +69,15 @@ export default function Timeline() {
           {/* FILTER */}
           <div className="relative">
             <button
-  onClick={() => {
-    setShowFilter(!showFilter);
-    setShowSort(false);
-  }}
-  className="bg-white border border-gray-300 rounded-md px-4 py-2"
->
-  <span className="font-semibold">Filter Timeline :</span>{" "}
-  {filter === "all" ? "All" : filter}
-</button>
+              onClick={() => {
+                setShowFilter(!showFilter);
+                setShowSort(false);
+              }}
+              className="bg-white border border-gray-300 rounded-md px-4 py-2"
+            >
+              <span className="font-semibold">Filter Timeline :</span>{" "}
+              {filter === "all" ? "All" : filter}
+            </button>
 
             {showFilter && (
               <div className="absolute mt-2 w-40 bg-white border rounded-md shadow">
@@ -82,9 +89,11 @@ export default function Timeline() {
                       setShowFilter(false);
                     }}
                     className={`px-4 py-2 cursor-pointer 
-                      ${filter === item
-                        ? "bg-[#264d3b] text-white"
-                        : "hover:bg-[#264d3b] hover:text-white"}`}
+                      ${
+                        filter === item
+                          ? "bg-[#264d3b] text-white"
+                          : "hover:bg-[#264d3b] hover:text-white"
+                      }`}
                   >
                     {item === "all" ? "All" : item}
                   </div>
@@ -102,7 +111,8 @@ export default function Timeline() {
               }}
               className="bg-white border border-gray-300 rounded-md px-4 py-2"
             >
-              <span className="font-semibold">Sort Timeline : </span>{sortOrder === "newest" ? "Newest" : "Oldest"}
+              <span className="font-semibold">Sort Timeline :</span>{" "}
+              {sortOrder === "newest" ? "Newest" : "Oldest"}
             </button>
 
             {showSort && (
@@ -114,9 +124,11 @@ export default function Timeline() {
                     setShowSort(false);
                   }}
                   className={`px-4 py-2 cursor-pointer 
-                    ${sortOrder === "newest"
-                      ? "bg-[#264d3b] text-white"
-                      : "hover:bg-[#264d3b] hover:text-white"}`}
+                    ${
+                      sortOrder === "newest"
+                        ? "bg-[#264d3b] text-white"
+                        : "hover:bg-[#264d3b] hover:text-white"
+                    }`}
                 >
                   Newest first
                 </div>
@@ -127,9 +139,11 @@ export default function Timeline() {
                     setShowSort(false);
                   }}
                   className={`px-4 py-2 cursor-pointer 
-                    ${sortOrder === "oldest"
-                      ? "bg-[#264d3b] text-white"
-                      : "hover:bg-[#264d3b] hover:text-white"}`}
+                    ${
+                      sortOrder === "oldest"
+                        ? "bg-[#264d3b] text-white"
+                        : "hover:bg-[#264d3b] hover:text-white"
+                    }`}
                 >
                   Oldest first
                 </div>
@@ -164,32 +178,21 @@ export default function Timeline() {
               key={item.id}
               className="bg-white rounded-lg shadow-sm p-4 flex items-center gap-4"
             >
-              {/* ICON */}
               <div className="text-2xl">{getIcon(item.type)}</div>
 
-              {/* TEXT */}
               <div>
                 <p className="font-medium">
-                  {item.title ? (
-                    <>
-                      <span className="text-[#264d3b] font-semibold">
-                        {item.title.split(" ")[0]}
-                      </span>{" "}
-                      {item.title.split(" ").slice(1).join(" ")}
-                    </>
-                  ) : (
-                    <>
-                      <span className="text-[#264d3b] font-semibold">
-                        {item.type || "Activity"}
-                      </span>{" "}
-                      {item.name ? `with ${item.name}` : ""}
-                    </>
-                  )}
+                  <span className="text-[#264d3b] font-semibold">
+                    {item.type || "Activity"}
+                  </span>{" "}
+                  {item.name ? `with ${item.name}` : ""}
                 </p>
 
-                <p className="text-sm text-gray-500">
-                  {formatDate(item.date)}
-                </p>
+                {/* ✅ ONLY DATE (no live time) */}
+                <div className="text-sm text-gray-500">
+                  <p>{formatDate(item.date)}</p>
+                </div>
+
               </div>
             </div>
           ))}
