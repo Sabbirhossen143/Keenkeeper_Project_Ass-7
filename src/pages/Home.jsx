@@ -14,9 +14,6 @@ export default function Home() {
       });
   }, []);
 
-  if (loading) {
-    return <div className="text-center mt-10 text-lg">Loading...</div>;
-  }
 
   // Stats calculation
   const total = friends.length;
@@ -67,8 +64,13 @@ export default function Home() {
         </div>
 
         {/* 🔥 Friends Section */}
-        <h2 className="font-semibold text-2xl mb-4">Your Friends</h2>
-
+        <h2 className="font-bold text-3xl mb-6">Your Friends</h2>
+        
+        {loading ? (
+  <div className="flex justify-center items-center py-12">
+    <div className="w-10 h-10 border-4 border-[#244D3F] border-t-transparent rounded-full animate-spin"></div>
+  </div>
+) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mb-12">
           {friends.map((friend) => (
             <Link key={friend.id} to={`/friend/${friend.id}`}>
@@ -118,6 +120,7 @@ export default function Home() {
             </Link>
           ))}
         </div>
+        )}
 
       </div>
     </div>

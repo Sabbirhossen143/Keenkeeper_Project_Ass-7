@@ -21,7 +21,14 @@ export default function FriendDetails() {
 
   const handleClick = (type) => {
     addEntry(type, friend.name);
-    toast(`${type} logged!`);
+    toast(
+  <div className="flex items-center gap-3">
+    <img src="/check.png" className="w-6 h-6" />
+    <span className="font-semibold text-[#244D3F]">
+      {type} with {friend.name}
+    </span>
+  </div>
+);
   };
 
   return (
