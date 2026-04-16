@@ -137,30 +137,30 @@ export default function FriendDetails() {
 
         {/* QUICK CHECK-IN */}
         <div className="bg-white p-4 rounded-xl shadow-sm">
-          <h3 className="text-[25px] font-bold text-[#244D3F] mb-3">Quick Check-In</h3>
+          <h3 className="text-[25px] font-bold text-[#244D3F] mb-6">Quick Check-In</h3>
 
           <div className="grid grid-cols-3 gap-4">
             <button
               onClick={() => handleClick("Call")}
-              className="p-4 bg-gray-50 rounded-lg hover:bg-gray-100 flex items-center justify-center gap-3"
+              className="p-4 bg-gray-50 rounded-lg hover:bg-gray-100 flex flex-col items-center justify-center gap-3"
             >
-              <img src="/call.png" className="w-5 h-5" />
+              <img src="/call.png" className="w-6 h-6" />
               <span>Call</span>
             </button>
 
             <button
               onClick={() => handleClick("Text")}
-              className="p-4 bg-gray-50 rounded-lg hover:bg-gray-100 flex items-center justify-center gap-2"
+              className="p-4 bg-gray-50 rounded-lg hover:bg-gray-100 flex flex-col items-center justify-center gap-2"
             >
-              <img src="/text.png" className="w-5 h-5" />
+              <img src="/text.png" className="w-6 h-6" />
               <span>Text</span>
             </button>
 
             <button
               onClick={() => handleClick("Video")}
-              className="p-4 bg-gray-50 rounded-lg hover:bg-gray-100 flex items-center justify-center gap-2"
+              className="p-4 bg-gray-50 rounded-lg hover:bg-gray-100 flex flex-col items-center justify-center gap-2"
             >
-              <img src="/video.png" className="w-5 h-5" />
+              <img src="/video.png" className="w-7 h-7" />
               <span>Video</span>
             </button>
           </div>

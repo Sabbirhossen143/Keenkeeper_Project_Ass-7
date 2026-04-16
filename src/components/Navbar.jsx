@@ -3,7 +3,7 @@ import { FaHome, FaClock, FaChartBar } from "react-icons/fa";
 
 export default function Navbar() {
   return (
-    <nav className="flex justify-between items-center px-16 py-3 shadow bg-white">
+    <nav className="flex justify-between items-center px-4 md:px-8 lg:px-16 py-3 shadow bg-white">
 
       {/* Logo */}
       <img src="/logo.png" className="h-10 w-auto" />
