@@ -42,6 +42,3 @@ npm run dev
 ```
 
 ---
-
-
-Your Name
