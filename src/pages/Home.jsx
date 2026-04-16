@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { TimelineContext } from "../context/TimelineContext";
 
 export default function Home() {
   const [friends, setFriends] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { timeline } = useContext(TimelineContext);
 
   useEffect(() => {
     fetch("/friends.json")
@@ -17,8 +20,19 @@ export default function Home() {
 
   // Stats calculation
   const total = friends.length;
-  const onTrack = friends.filter(f => f.status === "on-track").length;
-  const overdue = friends.filter(f => f.status === "overdue").length;
+  const onTrack = friends.filter(f => f.status === "On-Track").length;
+  const overdue = friends.filter(f => f.status === "Overdue").length;
+
+  const currentMonth = new Date().getMonth();
+const currentYear = new Date().getFullYear();
+
+const interactionsThisMonth = timeline.filter((t) => {
+  const d = new Date(t.date);
+  return (
+    d.getMonth() === currentMonth &&
+    d.getFullYear() === currentYear
+  );
+}).length;
 
   return (
     <div className="bg-gray-100 min-h-screen">
@@ -26,7 +40,7 @@ export default function Home() {
       {/* Container */}
       <div className="max-w-6xl mx-auto px-6 py-10">
 
-        {/* 🔥 Banner Section */}
+        {/* Banner Section */}
         <div className="text-center mb-10">
           <h1 className="text-5xl font-bold text-[#1F2937] mb-2">
             Friends to keep close in your life
@@ -40,30 +54,30 @@ export default function Home() {
           </button>
         </div>
 
-        {/* 🔥 Summary Cards */}
+        {/* Summary Cards */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
           <div className="bg-white p-4 rounded shadow text-center">
-            <h2 className="text-xl font-bold">{total}</h2>
-            <p className="text-gray-500 text-sm">Total Friends</p>
+            <h2 className="text-[32px] font-semibold text-[#244D3F]">{total}</h2>
+            <p className="text-gray-500 text-[17px]">Total Friends</p>
           </div>
 
           <div className="bg-white p-4 rounded shadow text-center">
-            <h2 className="text-xl font-bold">{onTrack}</h2>
-            <p className="text-gray-500 text-sm">On Track</p>
+            <h2 className="text-[32px] font-semibold text-[#244D3F]">{onTrack}</h2>
+            <p className="text-gray-500 text-[17px]">On Track</p>
           </div>
 
           <div className="bg-white p-4 rounded shadow text-center">
-            <h2 className="text-xl font-bold">{overdue}</h2>
-            <p className="text-gray-500 text-sm">Need Attention</p>
+            <h2 className="text-[32px] font-semibold text-[#244D3F]">{overdue}</h2>
+            <p className="text-gray-500 text-[17px]">Need Attention</p>
           </div>
 
           <div className="bg-white p-4 rounded shadow text-center">
-            <h2 className="text-xl font-bold">12</h2>
-            <p className="text-gray-500 text-sm">Interactions This Month</p>
+            <h2 className="text-[32px] font-semibold text-[#244D3F]">{interactionsThisMonth}</h2>
+            <p className="text-gray-500 text-[17px]">Interactions This Month</p>
           </div>
         </div>
 
-        {/* 🔥 Friends Section */}
+        {/* Friends Section */}
         <h2 className="font-bold text-3xl mb-6">Your Friends</h2>
         
         {loading ? (
