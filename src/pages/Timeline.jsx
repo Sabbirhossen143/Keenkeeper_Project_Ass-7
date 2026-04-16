@@ -4,6 +4,8 @@ import { TimelineContext } from "../context/TimelineContext";
 export default function Timeline() {
   const { timeline } = useContext(TimelineContext);
 
+  const [search, setSearch] = useState("");
+
   const [filter, setFilter] = useState("all");
   const [sortOrder, setSortOrder] = useState("newest");
 
@@ -24,13 +26,16 @@ export default function Timeline() {
     });
   };
 
-  // ✅ Filter
-  const filtered =
-    filter === "all"
-      ? timeline
-      : timeline.filter(
-          (t) => t.type?.toLowerCase() === filter.toLowerCase()
-        );
+  const filtered = timeline.filter((t) => {
+  const matchesType =
+    filter === "all" ||
+    t.type?.toLowerCase() === filter.toLowerCase();
+
+  const matchesSearch =
+    t.name?.toLowerCase().includes(search.toLowerCase());
+
+  return matchesType && matchesSearch;
+});
 
   // ✅ FIXED SORT (safe + correct)
   const sorted = [...filtered].sort((a, b) => {
@@ -64,6 +69,20 @@ export default function Timeline() {
 
         {/* TITLE */}
         <h1 className="text-3xl font-bold mb-6">Timeline</h1>
+
+        <div className="mb-4 relative">
+  <input
+    type="text"
+    placeholder="Search friend..."
+    value={search}
+    onChange={(e) => setSearch(e.target.value)}
+    className="w-full md:w-1/2 lg:w-1/2 pl-10 p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#244D3F]"
+  />
+  <img
+  src="/se.png"
+  className="absolute left-3 top-2.5 w-5 h-5 opacity-60"
+/>
+</div>
 
         {/* FILTER + SORT */}
         <div className="flex justify-between items-center mb-6">

@@ -71,7 +71,7 @@ export default function FriendDetails() {
           </p>
 
           <p className="text-xs text-gray-400 mt-2">
-            Preferred: email
+            Email : {friend.email}
           </p>
         </div>
 
