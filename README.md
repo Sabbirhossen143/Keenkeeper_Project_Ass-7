@@ -1,19 +1,47 @@
 # 📱 KeenKeeper – Friendship Management App
 
-## 📖 Description
+## 🚀 Project Description
 
-KeenKeeper is a web application that helps users maintain and track their relationships by logging interactions such as calls, texts, and video chats with friends.
+KeenKeeper is a simple and intuitive web application designed to help users maintain meaningful relationships. It allows users to track interactions like calls, texts, and video chats with friends, ensuring no connection is forgotten.
+
+---
 
 ## 🛠️ Technologies Used
 
-* React.js
-* Tailwind CSS
-* React Router
-* React Hot Toast
-* Recharts
+* ⚛️ React.js
+* 🎨 Tailwind CSS
+* 🔄 React Router
+* 🔥 React Hot Toast
+* 📊 Recharts
+
+---
 
 ## ✨ Key Features
 
-1. 📅 Track interactions (Call, Text, Video) in a timeline
-2. 🔍 Search and filter timeline by friend name and activity type
-3. 📊 View dynamic dashboard with friend statistics and monthly interactions
+### 1. 📅 Interaction Timeline
+
+Track all your communication activities (Call, Text, Video) with friends in a clean, organized timeline.
+
+### 2. 🔍 Search & Filter System
+
+Easily search interactions by friend name and filter by communication type for quick access.
+
+### 3. 📊 Dynamic Dashboard
+
+View real-time statistics like total friends, overdue connections, and monthly interactions.
+
+---
+
+## ⚙️ Installation
+
+```bash
+git clone https://github.com/your-username/keenkeeper.git
+cd keenkeeper
+npm install
+npm run dev
+```
+
+---
+
+
+Your Name
