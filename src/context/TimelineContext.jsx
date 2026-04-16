@@ -10,7 +10,7 @@ export const TimelineProvider = ({ children }) => {
       {
         id: Date.now(),
         type,
-        name, // ✅ IMPORTANT
+        name, 
         date: new Date().toISOString(),
       },
       ...prev,

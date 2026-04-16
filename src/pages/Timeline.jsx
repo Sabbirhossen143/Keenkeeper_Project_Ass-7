@@ -12,7 +12,7 @@ export default function Timeline() {
   const [showFilter, setShowFilter] = useState(false);
   const [showSort, setShowSort] = useState(false);
 
-  // ✅ Format Date ONLY
+  // Format Date ONLY
   const formatDate = (dateStr) => {
     if (!dateStr) return "No date";
 
@@ -37,7 +37,7 @@ export default function Timeline() {
   return matchesType && matchesSearch;
 });
 
-  // ✅ FIXED SORT (safe + correct)
+  // FIXED SORT (safe + correct)
   const sorted = [...filtered].sort((a, b) => {
     if (!a.date || !b.date) return 0;
 
@@ -68,7 +68,7 @@ export default function Timeline() {
       <div className="max-w-6xl mx-auto px-6">
 
         {/* TITLE */}
-        <h1 className="text-3xl font-bold mb-6">Timeline</h1>
+        <h1 className="text-4xl font-bold mb-6">Timeline</h1>
 
         <div className="mb-4 relative">
   <input
@@ -201,7 +201,7 @@ export default function Timeline() {
             >
               <img
   src={getIcon(item.type)}
-  className="w-8 h-8"
+  className="w-8 h-8 object-contain"
 />
 
               <div>
@@ -212,7 +212,7 @@ export default function Timeline() {
                   {item.name ? `with ${item.name}` : ""}
                 </p>
 
-                {/* ✅ ONLY DATE (no live time) */}
+                
                 <div className="text-sm text-gray-500">
                   <p>{formatDate(item.date)}</p>
                 </div>

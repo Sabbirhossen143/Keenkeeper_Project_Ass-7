@@ -23,7 +23,7 @@ export default function Stats() {
     { name: "Video", value: counts.Video },
   ];
 
-  // ✅ Check if all values are 0
+  // Check if all values are 0
   const hasData = data.some((item) => item.value > 0);
 
   const COLORS = ["#7c3aed", "#1f4d3b", "#2f9e44"];
@@ -33,7 +33,7 @@ export default function Stats() {
       <div className="max-w-6xl mx-auto px-6">
 
         {/* TITLE */}
-        <h1 className="text-5xl font-bold mb-6">
+        <h1 className="text-4xl font-bold mb-6">
           Friendship Analytics
         </h1>
 
@@ -44,7 +44,7 @@ export default function Stats() {
             By Interaction Type
           </p>
 
-          {/* ✅ CONDITIONAL RENDER */}
+          {/* CONDITIONAL RENDER */}
           {!hasData ? (
             <div className="flex flex-col items-center justify-center py-16 text-center">
               <img
